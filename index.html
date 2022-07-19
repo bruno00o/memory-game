@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- <div class="card">
+        <p>
+            &#x1F0A1;
+        </p>
+    </div> -->
+    <div id="gameArea">
+
+    </div>
+
+    <script>
+        let array = [];
+        for (let i = 10; i < 14; i++) {
+            for (let j = 1; j < 15; j++) {
+                if (j != 12)
+                    array.push("&#x1f0" + i.toString(16) + j.toString(16) + ";");
+                /* array.push(""); */
+            }
+        }
+
+        let gameArea = document.getElementById("gameArea");
+        for (let i = 0; i < 16; i++) {
+            let card = document.createElement("div");
+            let p = document.createElement("p");
+            card.classList.add("card");
+            p.innerHTML = array[i];
+            card.appendChild(p);
+            card.addEventListener('click', function () {
+                if (card.classList.contains('flip')) {
+                    card.classList.remove('flip');
+                    card.classList.add('flipBack');
+                } else {
+                    card.classList.add('flip');
+                    card.classList.remove('flipBack');
+                }
+            });
+            gameArea.appendChild(card);
+        }
+
+        /* const card = document.querySelector('.card');
+        card.addEventListener('click', function () {
+            if (card.classList.contains('flip')) {
+                card.classList.remove('flip');
+                card.classList.add('flipBack');
+            } else {
+                card.classList.add('flip');
+                card.classList.remove('flipBack');
+            }
+        }); */
+    </script>
+</body>
+
+</html>
