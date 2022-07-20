@@ -10,42 +10,95 @@
 </head>
 
 <body>
-    <!-- <div class="card">
-        <p>
-            &#x1F0A1;
-        </p>
-    </div> -->
-    <div id="gameArea">
 
+    <div id="intro">
+        <h1>Memory Game</h1>
+        <p>Click on the cards to flip them!</p>
+        <p>Try to find the matching pairs of cards!</p>
+        <p>Good luck!</p>
+        <p>How many cards?</p>
+        <form id="nCards">
+            <label for="12">12
+                <input type="radio" name="nbCards" id="12" checked>
+            </label>
+            <label for="16">16
+                <input type="radio" name="nbCards" id="16">
+            </label>
+            <label for="20">20
+                <input type="radio" name="nbCards" id="20">
+            </label>
+            <label for="24">24
+                <input type="radio" name="nbCards" id="24">
+            </label>
+            <button id="start" type="submit">Start Game</button>
+        </form>
+    </div>
+
+    <div id="gameArea">
     </div>
 
     <script>
-        let array = [];
-        for (let i = 10; i < 14; i++) {
-            for (let j = 1; j < 15; j++) {
-                if (j != 12)
-                    array.push("&#x1f0" + i.toString(16) + j.toString(16) + ";");
-                /* array.push(""); */
+        const images = ['svg/angular.svg', 'svg/c.svg', 'svg/git.svg', 'svg/html.svg', 'svg/java.svg', 'svg/javascript.svg', 'svg/mysql.svg', 'svg/node.svg', 'svg/npm.svg', 'svg/php.svg', 'svg/python.svg', 'svg/react.svg', 'svg/swift.svg', 'svg/typescript.svg', 'svg/vs.svg', 'svg/vue.svg']
+        
+        function positionCards(nCards, gameArea) {
+            let gameAreaHeight = gameArea.offsetHeight;
+            let diviseurs = [];
+            for (let i = 1; i <= nCards; i++) {
+                if (nCards % i == 0 && i != nCards && i != 1) {
+                    diviseurs.push(i);
+                }
+            }
+            if (gameAreaHeight > 450) {
+                if (diviseurs[diviseurs.length - 1] > 10) {
+                    gameArea.style.gridTemplateColumns = "auto ".repeat(diviseurs[diviseurs.length - 3]);
+                } else {
+                    gameArea.style.gridTemplateColumns = "auto ".repeat(diviseurs[diviseurs.length - 2]);
+                }
+            } else {
+                if (diviseurs[diviseurs.length - 1] > 10) {
+                    gameArea.style.gridTemplateColumns = "auto ".repeat(diviseurs[diviseurs.length - 2]);
+                } else {
+                    gameArea.style.gridTemplateColumns = "auto ".repeat(diviseurs[diviseurs.length - 1]);
+                }
             }
         }
 
+        /* 12, 16, 20, 24 */
+        let nCards = 24;
+        
         let gameArea = document.getElementById("gameArea");
-        for (let i = 0; i < 16; i++) {
-            let card = document.createElement("div");
-            let p = document.createElement("p");
-            card.classList.add("card");
-            p.innerHTML = array[i];
-            card.appendChild(p);
-            card.addEventListener('click', function () {
-                if (card.classList.contains('flip')) {
-                    card.classList.remove('flip');
-                    card.classList.add('flipBack');
-                } else {
-                    card.classList.add('flip');
-                    card.classList.remove('flipBack');
-                }
-            });
-            gameArea.appendChild(card);
+        positionCards(nCards, gameArea);
+        window.addEventListener("resize", function () {
+            positionCards(nCards, gameArea);
+        });
+
+        let nImages = nCards / 2;
+        /* select nImages from images */
+        let selectedImages = [];
+        for (let i = 0; i < nImages; i++) {
+            let random = Math.floor(Math.random() * images.length);
+            selectedImages.push(images[random]);
+            images.splice(random, 1);
+        }
+
+        for (let i = 0; i < nImages; i++) {
+            for (let j = 0; j < 2; j++) {
+                let card = document.createElement("div");
+                let img = document.createElement("img");
+                card.classList.add("card");
+                img.src = selectedImages[i];
+                card.appendChild(img);
+                card.addEventListener('click', function () {
+                    if (card.classList.contains('flip')) {
+                        card.classList.remove('flip');
+                        card.classList.add('flipBack');
+                    } else {
+                        card.classList.add('flip');
+                        card.classList.remove('flipBack');
+                    }
+                });
+                gameArea.appendChild(card);
+            }
         }
 
         /* const card = document.querySelector('.card');

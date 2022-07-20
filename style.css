@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
 
 @keyframes fadeIn {
     from {
@@ -35,6 +35,10 @@
     --c2: #678D58;
     --c3: #A6C48A;
     --cs: #20231A;
+    --c1h: #313628;
+    --c2h: #5C7D4F;
+    --c3h: #8daf6e;
+    --csh: #20231A;
 }
 
 * {
@@ -52,7 +56,7 @@ body {
     min-height: 100vh;
 }
 
-#gameArea {
+#gameArea, #intro {
     width: 80vw;
     height: 80vh;
     background: #DD9787;
@@ -63,13 +67,29 @@ body {
     padding: 1em;
 }
 
+#intro {
+    font-weight: 700;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#intro h1 {
+    font-weight: bolder;
+}
+
 .card {
     font-size: 75pt;
     border-radius: 2pt;
-    border: 2pt solid white;
+    border: 3pt solid white;
     white-space: nowrap;
     transform-style: preserve-3d;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
     --u: 1vmax;
     --hue: hue-rotate(0deg);
     --gp: 50% / calc(var(--u) * 12) calc(var(--u) * 12.8);
@@ -107,24 +127,30 @@ body {
             var(--c2) 0% 100%) var(--gp);
 }
 
-.card p {
-    margin-top: -38%;
-    margin-bottom: -15%;
+.card img {
     opacity: 0;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     pointer-events: none;
+    transform: rotateY(180deg);
 }
 
-.card.flip {
-    animation: rotateY .5s;
+.card.flip img {
+    animation: rotateYBack .5s ease-in;
+    transform: rotateY(0deg);
+    opacity: 1;
+}
+
+.card.flip,
+.card.flip:hover {
+    animation: rotateY .3s;
     background: #F9EFDC;
 }
 
 .card.flipBack {
-    animation: rotateYBack .5s;
+    animation: rotateYBack .3s;
     --u: 1vmax;
     --hue: hue-rotate(0deg);
     --gp: 50% / calc(var(--u) * 12) calc(var(--u) * 12.8);
@@ -162,7 +188,36 @@ body {
             var(--c2) 0% 100%) var(--gp);
 }
 
-.card.flip p {
-    animation: fadeIn 1s;
-    opacity: 1;
+.card:hover {
+    background: repeating-conic-gradient(from 61.93deg at 75% 36.5%,
+            var(--c1h) 0%,
+            var(--c1h) 2%,
+            var(--csh) 16%,
+            #fff0 0% 100%) var(--gp),
+        repeating-conic-gradient(from 118.07deg at 75% 87.5%,
+            var(--c3h) 0% 34.5%,
+            #fff0 0% 100%) var(--gp),
+        repeating-conic-gradient(from 118.07deg at 50% 75%,
+            #fff0 2%,
+            var(--csh) 17.15%,
+            #fff0 0% 100%) var(--gp),
+        repeating-conic-gradient(from 61.93deg at 50% 50%,
+            var(--c3h) 0% 15.59%,
+            var(--c2h) 0% 32.79%,
+            #fff0 0% 100%) var(--gp),
+        repeating-conic-gradient(from -118.07deg at 25% 12.5%,
+            var(--c2h) 0% 32.79%,
+            var(--c1h) 0% 50%,
+            #fff0 0% 100%) var(--gp),
+        repeating-conic-gradient(from -61.93deg at 25% 87.5%,
+            #fff0 0 67.25%,
+            var(--c2h) 0% 100%) var(--gp),
+        repeating-conic-gradient(from -61.93deg at 50% 75%,
+            #fff0 0% 66.5%,
+            var(--c1h) 0% 84.25%,
+            var(--c3h) 0% 100%) var(--gp),
+        repeating-conic-gradient(from -61.93deg at 25% 37.5%,
+            var(--c3h) 0% 34.5%,
+            var(--c1h) 0% 67.25%,
+            var(--c2h) 0% 100%) var(--gp);
 }
