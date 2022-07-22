@@ -39,33 +39,7 @@
 
     <script>
         const images = ['svg/angular.svg', 'svg/c.svg', 'svg/git.svg', 'svg/html.svg', 'svg/java.svg', 'svg/javascript.svg', 'svg/mysql.svg', 'svg/node.svg', 'svg/npm.svg', 'svg/php.svg', 'svg/python.svg', 'svg/react.svg', 'svg/swift.svg', 'svg/typescript.svg', 'svg/vs.svg', 'svg/vue.svg']
-
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        function random(n) {
-            return Math.floor(n * Math.random());
-        }
-
-        function swap(array, a, b) {
-            let temp = array[a];
-            array[a] = array[b];
-            array[b] = temp;
-            return array
-        }
-
-        function shuffleCards(length) {
-            var cards = [];
-            for (var i = 0; i < length; i++) {
-                cards.push(i);
-            }
-            for (let i = 0; i < cards.length; i++) {
-                swap(cards, i, random(cards.length - 1));
-            }
-            return cards;
-        }
-
+        
         function responsiveGameArea(nCards, gameArea) {
             let gameAreaHeight = gameArea.offsetHeight;
             let gameAreaWidth = gameArea.offsetWidth;
@@ -99,8 +73,9 @@
         }
 
         /* 12, 16, 20, 24 */
-        let nCards = 20;
-
+        let nCards = 16;
+        let cards = [];
+        
         let gameArea = document.getElementById("gameArea");
         responsiveGameArea(nCards, gameArea);
         window.addEventListener("resize", function () {
@@ -108,16 +83,13 @@
         });
 
         let nImages = nCards / 2;
+        /* select nImages from images */
         let selectedImages = [];
         for (let i = 0; i < nImages; i++) {
             let random = Math.floor(Math.random() * images.length);
             selectedImages.push(images[random]);
             images.splice(random, 1);
         }
-
-        let shuffledCards = shuffleCards(nCards);
-        console.log(shuffledCards);
-        let k = 0;
 
         for (let i = 0; i < nImages; i++) {
             for (let j = 0; j < 2; j++) {
@@ -135,94 +107,9 @@
                         card.classList.remove('flipBack');
                     }
                 });
-                card.style.opacity = "0";
-                shuffledCards[shuffledCards.indexOf(k)] = card;
-                k++;
-            }
-        }
-
-        for (let i = 0; i < nCards; i++) {
-            gameArea.appendChild(shuffledCards[i]);
-        }
-
-        let cardWidth = document.getElementsByClassName("card")[0].offsetWidth;
-        let cardHeight = document.getElementsByClassName("card")[0].offsetHeight;
-
-        for (let i = 0; i < nImages; i++) {
-            for (let j = 0; j < 2; j++) {
-                let card = document.createElement("div");
-                card.classList.add("card");
-                card.classList.add("shuffle");
-                card.style.width = cardWidth + "px";
-                card.style.height = cardHeight + "px";
-                card.style.position = "absolute";
-                card.style.left = (gameArea.offsetWidth - cardWidth) / 2 + "px";
-                card.style.top = (gameArea.offsetHeight - cardHeight) / 2 + "px";
-                card.style.transform = "translate(50%, 50%)";
                 gameArea.appendChild(card);
             }
         }
-
-        let cards = document.getElementsByClassName("card");
-        let absoluteCards = document.getElementsByClassName("shuffle");
-        let i = 0;
-
-
-        console.log(shuffledCards);
-
-        setTimeout(function () {
-        }, 1000);
-
-        setInterval(function () {
-            let shuffledCard = shuffledCards[i];
-            let shuffledCardX = shuffledCard.offsetLeft;
-            let shuffledCardY = shuffledCard.offsetTop;
-            absoluteCards[i].style.transform = "none";
-
-            absoluteCards[i].style.left = shuffledCardX + "px";
-            absoluteCards[i].style.top = shuffledCardY + "px";
-
-            /* absoluteCards[i].animate([
-                { top : shuffledCardY + "px", left : shuffledCardX + "px" },
-            ], {
-                duration: 1000,
-                easing: 'ease',
-            }); */
-            /* move card to position with interval */
-            
-            
-            /* absoluteCards[i].style.display = "none"; */
-            /* shuffledCards[i].style.opacity = "1"; */
-            i++;
-            if (i == nCards) {
-                i = 0;
-                clearInterval(this);
-            }
-        }, 450);
-
-
-        /* for (let i = 0; i < shuffledCards.length; i++) {
-            let shuffledCard = shuffledCards[i];
-            let shuffledCardX = shuffledCard.offsetLeft;
-            let shuffledCardY = shuffledCard.offsetTop;
-            absoluteCards[i].style.left = shuffledCardX + "px";
-            absoluteCards[i].style.top = shuffledCardY + "px";
-            absoluteCards[i].style.transform = "none";
-        } */
-
-
-        /* while (cards.length > 0) {
-            let random = Math.floor(Math.random() * cards.length);
-            let x = cards[random].offsetLeft;
-            let y = cards[random].offsetTop;
-            absoluteCards[i].transform = "none";
-            absoluteCards[i].style.left = x + "px";
-            absoluteCards[i].style.top = y + "px";
-            cards.splice(random, 1);
-
-            i++;
-        } */
-
 
         /* const card = document.querySelector('.card');
         card.addEventListener('click', function () {
