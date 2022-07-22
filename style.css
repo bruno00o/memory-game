@@ -71,7 +71,7 @@ body {
     font-weight: 700;
     position: absolute;
     z-index: 1;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
