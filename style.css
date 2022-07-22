@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 @keyframes fadeIn {
     from {
@@ -48,15 +49,17 @@
 }
 
 body {
-    font-family: 'Merriweather', serif;
+    font-family: 'Roboto', serif;
     background-color: #F6E7CB;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    color: var(--cs);
 }
 
-#gameArea, #intro {
+#gameArea,
+#intro {
     height: 100%;
     min-width: 80vw;
     min-height: 80vh;
@@ -69,10 +72,11 @@ body {
 }
 
 #intro {
+    height: 80vh;
     font-weight: 700;
     position: absolute;
     z-index: 1;
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -80,6 +84,91 @@ body {
 
 #intro h1 {
     font-weight: bolder;
+    font-family: 'Merriweather', serif;
+}
+
+#intro #nbCardsSelector {
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+}
+
+#nbCardsSelector label {
+    display: flex;
+    gap: .4em;
+    flex-direction: row-reverse;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#nbCardsSelector input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.radio-input {
+    height: 15px;
+    width: 15px;
+    background-color: white;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#nbCardsSelector label:hover input:not(:checked)~.radio-input {
+    background-color: #EDC8BF;
+}
+
+#nbCardsSelector input:checked~.radio-input {
+    background-color: #8F3B28;
+}
+
+.radio-input:after {
+    content: "";
+    display: none;
+}
+
+#nbCardsSelector input:checked~.radio-input:after {
+    display: block;
+}
+
+#nbCardsSelector label .radio-input:after {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: white;
+}
+
+#nCards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+#nCards #start {
+    outline: none;
+    border: none;
+    background-color: #8F3B28;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: .5em 1em;
+    border-radius: 10pt;
+    cursor: pointer;
+
 }
 
 .card {
@@ -93,7 +182,6 @@ body {
     justify-content: center;
     min-height: 100px;
     min-width: 100px;
-    transition: opacity 1s ease-in-out;
     --u: 1vmax;
     --hue: hue-rotate(0deg);
     --gp: 50% / calc(var(--u) * 12) calc(var(--u) * 12.8);
@@ -231,7 +319,9 @@ body {
 }
 
 @media screen and (max-width: 450px) {
-    #gameArea {
+
+    #gameArea,
+    #intro {
         width: 95vw;
     }
 }
