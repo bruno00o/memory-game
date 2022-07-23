@@ -70,10 +70,11 @@ function createCards(selectedImages, nCards) {
     for (let i = 0; i < nImages; i++) {
         for (let j = 0; j < 2; j++) {
             let card = document.createElement("div");
-            let img = document.createElement("img");
+            /* let img = document.createElement("img"); */
             card.classList.add("card");
-            img.src = selectedImages[i];
-            card.appendChild(img);
+            /* img.src = selectedImages[i]; */
+            card.innerHTML = selectedImages[i];
+            /* card.appendChild(img); */
             card.addEventListener('click', function () {
                 if (card.classList.contains('flip')) {
                     card.classList.remove('flip');

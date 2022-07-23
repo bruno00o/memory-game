@@ -223,7 +223,7 @@ body {
     transition: all 0.4s ease-in-out;
 }
 
-.card img {
+.card svg {
     opacity: 0;
     user-select: none;
     -moz-user-select: none;
@@ -231,9 +231,10 @@ body {
     -ms-user-select: none;
     pointer-events: none;
     transform: rotateY(180deg);
+    
 }
 
-.card.flip img {
+.card.flip svg {
     animation: rotateYBack .5s ease-in;
     transform: rotateY(0deg);
     opacity: 1;
