@@ -235,7 +235,7 @@ body {
 
 .card.flip svg,
 .card.matched svg {
-    animation: rotateYBack .5s ease-in;
+    animation: rotateYBack .3s ease-in;
     transform: rotateY(0deg);
     opacity: 1;
 }
@@ -244,7 +244,7 @@ body {
 .card.flip:hover,
 .card.card.matched,
 .card.card.matched:hover {
-    animation: rotateY .3s;
+    animation: rotateY .2s;
     background: #F9EFDC;
 }
 
@@ -253,7 +253,7 @@ body {
 }
 
 .card.flipBack {
-    animation: rotateYBack .3s;
+    animation: rotateYBack .2s;
 }
 
 .card:hover {

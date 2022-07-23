@@ -99,7 +99,7 @@ function checkSameCards() {
                 secondCard.classList.remove("flip");
                 firstCard.classList.add("flipBack");
                 secondCard.classList.add("flipBack");
-            }, 1000);
+            }, 800);
         }
     }
     checkWin();
