@@ -1,16 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
 @keyframes rotateY {
     from {
         transform: rotateY(0deg);
@@ -59,19 +49,20 @@ body {
 }
 
 #gameArea,
-#intro {
+#intro,
+#win {
     height: 100%;
     min-width: 80vw;
     min-height: 80vh;
     background: #DD9787;
     border-radius: 10pt;
     display: grid;
-    /* grid-template-columns: auto auto auto auto; */
     gap: 1em;
     padding: 1em;
 }
 
-#intro {
+#intro,
+#win {
     height: 80vh;
     font-weight: 700;
     position: absolute;
@@ -82,12 +73,18 @@ body {
     align-items: center;
 }
 
-#intro h1 {
+#win {
+    display: none;
+}
+
+#intro h1,
+#win h1 {
     font-weight: bolder;
     font-family: 'Merriweather', serif;
 }
 
-#intro #nbCardsSelector {
+#intro #nbCardsSelector,
+#win #nbCardsSelector {
     display: flex;
     width: 300px;
     justify-content: space-around;
@@ -158,7 +155,8 @@ body {
     gap: 1em;
 }
 
-#nCards #start {
+#nCards #start,
+#restart {
     outline: none;
     border: none;
     background-color: #8F3B28;
@@ -171,7 +169,8 @@ body {
 
 }
 
-.card {
+.card,
+.card.flipBack {
     font-size: 75pt;
     border-radius: 2pt;
     border: 3pt solid white;
@@ -231,58 +230,30 @@ body {
     -ms-user-select: none;
     pointer-events: none;
     transform: rotateY(180deg);
-    
+    fill: #313628;
 }
 
-.card.flip svg {
+.card.flip svg,
+.card.matched svg {
     animation: rotateYBack .5s ease-in;
     transform: rotateY(0deg);
     opacity: 1;
 }
 
 .card.flip,
-.card.flip:hover {
+.card.flip:hover,
+.card.card.matched,
+.card.card.matched:hover {
     animation: rotateY .3s;
     background: #F9EFDC;
 }
 
+.card.matched {
+    cursor: default;
+}
+
 .card.flipBack {
     animation: rotateYBack .3s;
-    --u: 1vmax;
-    --hue: hue-rotate(0deg);
-    --gp: 50% / calc(var(--u) * 12) calc(var(--u) * 12.8);
-    filter: var(--hue);
-    background: repeating-conic-gradient(from 61.93deg at 75% 36.5%,
-            var(--c1) 0%,
-            var(--c1) 2%,
-            var(--cs) 16%,
-            #fff0 0% 100%) var(--gp),
-        repeating-conic-gradient(from 118.07deg at 75% 87.5%,
-            var(--c3) 0% 34.5%,
-            #fff0 0% 100%) var(--gp),
-        repeating-conic-gradient(from 118.07deg at 50% 75%,
-            #fff0 2%,
-            var(--cs) 17.15%,
-            #fff0 0% 100%) var(--gp),
-        repeating-conic-gradient(from 61.93deg at 50% 50%,
-            var(--c3) 0% 15.59%,
-            var(--c2) 0% 32.79%,
-            #fff0 0% 100%) var(--gp),
-        repeating-conic-gradient(from -118.07deg at 25% 12.5%,
-            var(--c2) 0% 32.79%,
-            var(--c1) 0% 50%,
-            #fff0 0% 100%) var(--gp),
-        repeating-conic-gradient(from -61.93deg at 25% 87.5%,
-            #fff0 0 67.25%,
-            var(--c2) 0% 100%) var(--gp),
-        repeating-conic-gradient(from -61.93deg at 50% 75%,
-            #fff0 0% 66.5%,
-            var(--c1) 0% 84.25%,
-            var(--c3) 0% 100%) var(--gp),
-        repeating-conic-gradient(from -61.93deg at 25% 37.5%,
-            var(--c3) 0% 34.5%,
-            var(--c1) 0% 67.25%,
-            var(--c2) 0% 100%) var(--gp);
 }
 
 .card:hover {
@@ -322,7 +293,8 @@ body {
 @media screen and (max-width: 450px) {
 
     #gameArea,
-    #intro {
+    #intro,
+    #win {
         width: 95vw;
     }
 }
