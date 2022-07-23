@@ -67,6 +67,7 @@ function checkWin() {
             let intro = document.getElementById("intro");
             win.style.display = "flex";
             let restart = document.getElementById("restart");
+            gameArea.style.display = "none";
             restart.addEventListener('click', function () {
                 win.style.display = "none";
                 while (gameArea.firstChild) {

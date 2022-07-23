@@ -290,6 +290,23 @@ body {
             var(--c2h) 0% 100%) var(--gp);
 }
 
+#credits {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    font-size: .8em;
+    color: #8F3B28;
+    opacity: .75;
+}
+
+#credits:hover {
+    opacity: 1;
+}
+
+#credits a {
+    color: #8F3B28;
+}
+
 @media screen and (max-width: 450px) {
 
     #gameArea,
