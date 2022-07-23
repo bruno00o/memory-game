@@ -190,8 +190,8 @@ window.onload = function () {
         intro.style.display = 'none';
         let nCards = form.querySelector('input[name="nbCards"]:checked').id;
         nCards = parseInt(nCards);
-        let nbCardsArray = [];
         let gameArea = document.getElementById("gameArea");
+        gameArea.style.display = "grid";
         let selectedImages = selectImages(nCards, images);
         let shuffledCards = createCards(selectedImages, nCards);
         for (let i = 0; i < nCards; i++) {
